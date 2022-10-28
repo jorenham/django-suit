@@ -1,5 +1,5 @@
 from copy import copy
-from inspect import getargspec
+import inspect
 
 import django
 
@@ -266,8 +266,8 @@ def result_row_attrs(context, cl, row_index):
     instance = cl.result_list[row_index]
 
     # Backwards compatibility for suit_row_attributes without request argument
-    args = getargspec(suit_row_attributes)
-    if 'request' in args[0]:
+    argspec = inspect.getfullargspec(suit_row_attributes)
+    if 'request' in argspec[0]:
         new_attrs = suit_row_attributes(instance, context['request'])
     else:
         new_attrs = suit_row_attributes(instance)
