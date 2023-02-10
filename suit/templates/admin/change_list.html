@@ -27,7 +27,10 @@
     <script type="text/javascript">
       (function ($) {
         $(document).ready(function ($) {
-          Actions($("tr input.action-select"));
+          const actionCheckboxes = $("tr input.action-select");
+          if (actionCheckboxes.length) {
+            Actions(actionCheckboxes);
+          }
         });
       })(django.jQuery);
     </script>
