@@ -9,7 +9,7 @@ from suit.widgets import NumberInput, SuitSplitDateTimeWidget
 from suit.compat import ct_admin
 
 
-class SortableModelAdminBase(object):
+class SortableModelAdminBase:
     """
     Base class for SortableTabularInline and SortableModelAdmin
     """
@@ -183,18 +183,3 @@ class SortableModelAdmin(SortableModelAdminBase, ModelAdmin):
                 next_order = 1
             setattr(obj, self.sortable, next_order)
         super(SortableModelAdmin, self).save_model(request, obj, form, change)
-
-
-# Quite aggressive detection and intrusion into Django CMS
-# Didn't found any other solutions though
-if 'cms' in settings.INSTALLED_APPS:
-    try:
-        from cms.admin.forms import PageForm
-
-        PageForm.Meta.widgets = {
-            'publication_date': SuitSplitDateTimeWidget,
-            'publication_end_date': SuitSplitDateTimeWidget,
-        }
-    except ImportError:
-        pass
-
