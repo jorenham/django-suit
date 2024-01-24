@@ -1,10 +1,18 @@
-from django.test import TestCase
-from suit.widgets import LinkedSelect, HTML5Input, EnclosedInput, \
-    NumberInput, SuitDateWidget, SuitTimeWidget, SuitSplitDateTimeWidget, \
-    AutosizedTextarea
-from django.utils.translation import ugettext as _
 from django.templatetags.static import static
+from django.test import TestCase
+from django.utils.translation import gettext as _
+
 from suit import utils
+from suit.widgets import (
+    LinkedSelect, 
+    HTML5Input,
+    EnclosedInput,
+    NumberInput, 
+    SuitDateWidget, 
+    SuitTimeWidget, 
+    SuitSplitDateTimeWidget,
+    AutosizedTextarea,
+)
 
 django_version = utils.django_major_version()
 
