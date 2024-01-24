@@ -1,3 +1,9 @@
+**django-suit is abandoned!**
+
+This fork is a quick-and-dirty fix for the latest Django versions for Suit V1.
+
+---
+
 ===========
 Django Suit
 ===========
