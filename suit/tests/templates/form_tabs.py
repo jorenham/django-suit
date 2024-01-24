@@ -1,13 +1,9 @@
 from django.contrib import admin
-from django.utils.translation import ugettext
+from django.urls import reverse
+from django.utils.translation import gettext as _
+
 from suit.tests.mixins import ModelsTestCaseMixin, UserTestCaseMixin
 from suit.tests.models import Book, BookAdmin, test_app_label
-
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    # For Django >= 2.0
-    from django.urls import reverse
 
 
 app_label = test_app_label()
@@ -15,7 +11,7 @@ app_label = test_app_label()
 
 class TabbedBookAdmin(BookAdmin):
     list_filter = ('id', 'name',)
-    suit_form_tabs = (('tab1', 'Tab1'), ('tab2', ugettext('Tab2')))
+    suit_form_tabs = (('tab1', 'Tab1'), ('tab2', _('Tab2')))
     suit_form_includes = None
 
 
