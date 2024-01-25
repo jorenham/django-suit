@@ -21,4 +21,4 @@ def args_to_dict(args):
     Convert template tag args to dict
     Format {% suit_bc 1.5 'x' 1.6 'y' %} to { '1.5': 'x', '1.6': 'y' }
     """
-    return dict(zip(args[0::2], args[1::2]))
+    return dict(zip(args[::2], args[1::2]))

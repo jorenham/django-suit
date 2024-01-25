@@ -2,6 +2,8 @@ from django.contrib.admin import ModelAdmin
 from django.conf import settings
 from . import VERSION
 
+CONFIG_KEY = 'SUIT_CONFIG'
+
 
 def default_config():
     return {
@@ -23,31 +25,15 @@ def default_config():
             'auth': 'icon-lock',
             'sites': 'icon-leaf',
         },
-        # 'MENU_EXCLUDE': ('auth.group',),
-        # 'MENU': (
-        #     'sites',
-        #     {'app': 'auth', 'icon':'icon-lock', 'models': ('user', 'group')},
-        #     {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
-        #     {'label': 'Support', 'icon':'icon-question-sign', 'url': '/support/'},
-        # ),
-
-        # misc
         'LIST_PER_PAGE': 20
     }
 
 
-def get_config(param=None):
-    config_key = 'SUIT_CONFIG'
-    if hasattr(settings, config_key):
-        config = getattr(settings, config_key, {})
-    else:
-        config = default_config()
-    if param:
-        value = config.get(param)
-        if value is None:
-            value = default_config().get(param)
-        return value
-    return config
+def get_config(key=None):
+    default = default_config()
+    config = getattr(settings, CONFIG_KEY, default)
+    return config.get(key, default.get(key)) if key else config
+
 
 # Reverse default actions position
 ModelAdmin.actions_on_top = False
@@ -55,24 +41,3 @@ ModelAdmin.actions_on_bottom = True
 
 # Set global list_per_page
 ModelAdmin.list_per_page = get_config('LIST_PER_PAGE')
-
-def setup_filer():
-    from suit.widgets import AutosizedTextarea
-    from filer.admin.imageadmin import ImageAdminForm
-    from filer.admin.fileadmin import FileAdminChangeFrom
-    from filer.admin import FolderAdmin
-
-    def ensure_meta_widgets(meta_cls):
-        if not hasattr(meta_cls, 'widgets'):
-            meta_cls.widgets = {}
-
-        meta_cls.widgets['description'] = AutosizedTextarea
-
-    ensure_meta_widgets(ImageAdminForm.Meta)
-    ensure_meta_widgets(FileAdminChangeFrom.Meta)
-    FolderAdmin.actions_on_top = False
-    FolderAdmin.actions_on_bottom = True
-
-
-if 'filer' in settings.INSTALLED_APPS:
-    setup_filer()

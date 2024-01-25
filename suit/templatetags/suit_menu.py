@@ -8,12 +8,9 @@ from django.contrib.admin import AdminSite
 from django.http import HttpRequest
 from django.urls import resolve, reverse
 
-from suit import utils
 from suit.config import get_config
 
 register = template.Library()
-
-django_version = utils.django_major_version()
 
 simple_tag = register.simple_tag
 

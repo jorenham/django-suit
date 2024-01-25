@@ -1,5 +1,6 @@
 from django.contrib.admin import ModelAdmin
 from django.conf import settings
+
 from suit import VERSION
 from suit.config import default_config, get_config
 from suit.templatetags.suit_tags import admin_url
