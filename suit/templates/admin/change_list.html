@@ -106,7 +106,7 @@
               {% if action_form and actions_on_bottom and cl.full_result_count %}
                 {% admin_actions %}{% endif %}
             {% else %}
-              {% suit_bc_value 1.5 'pop' 1.6 '_popup' as POPUP_VAR %}
+              {% suit_bc 1.5 'pop' 1.6 '_popup' as POPUP_VAR %}
               <div class="alert alert-block alert-info">
                 {% if cl.full_result_count %}
                   <h4>{% trans 'Nothing found' %}!</h4>
