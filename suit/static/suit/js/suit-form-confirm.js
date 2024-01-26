@@ -16,24 +16,35 @@ var confirmExitIfModified = (function () {
             var element = form.elements[i];
             var type = element.type;
             if (type == "checkbox" || type == "radio") {
-                if (element.checked != element.defaultChecked) {
+                if (element.checked !== element.defaultChecked) {
                     return true;
                 }
-            }
-            else if (type == "hidden" || type == "password" ||
-                type == "text" || type == "textarea") {
+            } else if (
+                type === "hidden" 
+                || type === "text" 
+                || type === "textarea"
+                || type === "password" 
+                || type === "number"
+                || type === "email"
+                || type === "tel"
+                || type === "url"
+                || type === "date"
+                || type === "month"
+                || type === "time"
+                || type === "color"
+            ) {
                 var cls = element.getAttribute('class');
                 if (!cls) cls = '';
-                if (element.value != element.defaultValue &&
+                if (
+                    element.value != element.defaultValue
                     // Fix for select2 multiple
-                    cls.indexOf('select2') == -1 &&
+                    && cls.indexOf('select2') === -1
                     // Skip elements with ignore-changes class
-                    cls.indexOf('ignore-changes') == -1
-                    ) {
+                    && cls.indexOf('ignore-changes') === -1
+                ) {
                     return true;
                 }
-            }
-            else if (type == "select-one" || type == "select-multiple") {
+            } else if (type == "select-one" || type == "select-multiple") {
                 for (var j = 0; j < element.options.length; j++) {
                     if (element.options[j].selected !=
                         element.options[j].defaultSelected) {
@@ -47,17 +58,17 @@ var confirmExitIfModified = (function () {
 
     var submit = false;
     return function (form_id, message) {
-        var form = document.forms[form_id]
-        if (form) {
-            form.onsubmit = function (e) {
-                e = e || window.event;
-                submit = true
-            };
-        }
-        window.onbeforeunload = function (e) {
+        var form = document.forms[form_id];
+        if (!form) return;
+        
+        form.onsubmit = function (e) {
             e = e || window.event;
+            submit = true;
+        };
+        window.onbeforeunload = function (e) {
             if (!submit && formIsDirty(form)) {
                 // For IE and Firefox
+                e = e || window.event;
                 if (e) {
                     e.returnValue = message;
                 }
