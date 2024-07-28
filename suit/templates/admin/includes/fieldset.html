@@ -8,7 +8,6 @@
         </h2>{% endif %}
   {% for line in fieldset %}
     {% with n_fields=line.fields|length %}
-      <div class="control-group form-row{% if line.errors %} {{ singlefield|yesno:'error,first-error' }} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %} {{ field.field.field.widget.attrs.rowclass }}{% endfor %}{{ singlefield|yesno:',multi-field-row' }}">
       <div class="control-group form-row{% if line.errors %} {% if n_fields > 1 %}first-{% endif %}error errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %} {{ field.field.field.widget.attrs.rowclass }}{% endfor %}{% if n_fields > 1 %}multi-field-row{% endif %}">
         {% for field in line %}
           {% spaceless %}
