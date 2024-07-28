@@ -7,14 +7,15 @@
             {% endif %}
         </h2>{% endif %}
   {% for line in fieldset %}
-    {% with singlefield=line.fields|length_is:'1' %}
+    {% with n_fields=line.fields|length %}
       <div class="control-group form-row{% if line.errors %} {{ singlefield|yesno:'error,first-error' }} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %} {{ field.field.field.widget.attrs.rowclass }}{% endfor %}{{ singlefield|yesno:',multi-field-row' }}">
+      <div class="control-group form-row{% if line.errors %} {% if n_fields > 1 %}first-{% endif %}error errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %} {{ field.field.field.widget.attrs.rowclass }}{% endfor %}{% if n_fields > 1 %}multi-field-row{% endif %}">
         {% for field in line %}
           {% spaceless %}
 
         {# write special control tags only for first multi field #}
         {% if forloop.first %}
-            <div{% if not singlefield %}
+            <div{% if n_fields > 1 %}
                 class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}"{% endif %}>
 
             <div class="control-label">
@@ -22,12 +23,12 @@
             </div>
             <div class="controls">
             {# if multi-fields and first field #}
-            {% if not singlefield %}
+            {% if n_fields > 1 %}
               <div class="multi-field-box">
             {% endif %}
         {% else %}
           {# If multi-fields and not first wrap also label #}
-          {% if not singlefield and not forloop.first %}
+          {% if n_fields > 1 and not forloop.first %}
             <div class="multi-field-box{{ field.errors|yesno:' error,' }}">
           {% endif %}
             {{ field.label_tag }}
@@ -36,7 +37,7 @@
         {% if not field.is_readonly and field.errors %}<div class="inline error errors">{% endif %}
 
         {# If multi-fields and wrap controls too #}
-         {% if not singlefield %}
+         {% if n_fields > 1 %}
             <div class="multi-field-controls">
           {% endif %}
 
@@ -47,22 +48,22 @@
         {% endif %}
 
         {# For single field errors#}
-        {% if singlefield and line.errors %}
+        {% if n_fields == 1 and line.errors %}
             <span class="help-inline">{{ line.errors }}</span>
         {% endif %}
 
         {# For multi field errors #}
-        {% if field.errors and not singlefield and not field.is_readonly %}
+        {% if field.errors and n_fields > 1 and not field.is_readonly %}
           <span class="help-block">{{ field.errors|striptags }}</span>
         {% endif %}
 
         {% if field.field.help_text %}
-          <span class="{% if line.errors or field.errors or not singlefield %}help-block{% else %}help-inline{% endif %}">{{ field.field.help_text|safe }}</span>
+          <span class="{% if line.errors or field.errors or n_fields > 1 %}help-block{% else %}help-inline{% endif %}">{{ field.field.help_text|safe }}</span>
         {% endif %}
 
         {% if not field.is_readonly and field.errors %}</div>{% endif %}
 
-        {% if not singlefield %}
+        {% if n_fields > 1 %}
          </div> {# close multi-controls #}
          </div> {# close multi-field-box #}
         {% endif %}
