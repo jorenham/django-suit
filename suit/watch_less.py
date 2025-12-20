@@ -1,9 +1,15 @@
-import sys
+"""
+Requires `lessc` compiler: `npm install -g less`.
+
+Run as `uv run suit/watch_less.py suit/static/suit/less/suit.less`
+"""
+
 import os
+import sys
 import time
 
+from watchdog.events import FileModifiedEvent, FileSystemEventHandler
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler, FileModifiedEvent
 
 
 class LessCompiler(FileSystemEventHandler):
