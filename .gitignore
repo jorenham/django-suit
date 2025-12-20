@@ -4,6 +4,7 @@
 *~
 *.log
 .idea
+.venv
 docs/_build/
 /build
 /dist/
