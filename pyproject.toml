@@ -1,0 +1,47 @@
+[build-system]
+requires = ["uv_build>=0.9,<0.10"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "suit"
+module-root = ""
+
+[project]
+name = "django-suit"
+version = "0.6.0"
+description = "Fork of django-suit V1 for Django 6.x support"
+readme = "README.md"
+license = "CC-BY-NC-3.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+authors = [
+    {name = "Kaspars Sprogis (darklow)", email = "info@djangosuit.com"},
+]
+maintainers = [
+    {name = "Joren Hammudoglu (jorenham)", email = "jhammudoglu@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Environment :: Web Environment",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: User Interfaces",
+]
+dependencies = [
+    "django>=6.0",
+]
+
+[project.urls]
+Repository = "https://github.com/jorenham/django-suit/tree/v1-django6"
+
+[dependency-groups]
+dev = [
+    "django-stubs>=5.2.8",  # no django 6 support yet
+]
