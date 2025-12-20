@@ -4,7 +4,7 @@
     border-radius: @border-radius;
     background: #fff;
     width: auto;
-    .grey-box-shadow;
+    .grey-box-shadow();
     td, th {
         padding: 8px 20px 8px 15px;
         font-weight: normal;
@@ -44,7 +44,7 @@
         text-align: left;
         margin-bottom: 3px;
         a {
-            .italic-title;
+            .italic-title();
             text-decoration: none;
         }
     }
@@ -57,11 +57,11 @@
         th {
             text-align: center;
             font-weight: bold;
-            .grey-gradient;
+            .grey-gradient();
             box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .3);
             border-bottom: 1px solid #ddd;
             border-top: 1px solid #ddd;
-            .white-shadow;
+            .white-shadow();
             padding: 5px 10px;
             color: @text-color;
         }
@@ -71,8 +71,8 @@
 .table {
     th, td {
         background-color: white;
-        .white-inset;
-        .white-shadow;
+        .white-inset();
+        .white-shadow();
         input {
             margin: 0;
         }
@@ -170,7 +170,7 @@
     table.table {
         tr.add-row td { //            background-color: #eee;
             .vertical-gradient(#efefef, #e2e2e2);
-            .white-shadow;
+            .white-shadow();
             padding-left: 10px;
         }
         td.delete {
