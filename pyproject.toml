@@ -44,4 +44,5 @@ Repository = "https://github.com/jorenham/django-suit/tree/v1-django6"
 [dependency-groups]
 dev = [
     "django-stubs>=5.2.8",  # no django 6 support yet
+    "watchdog>=6.0.0",
 ]
