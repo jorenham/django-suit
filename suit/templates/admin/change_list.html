@@ -22,18 +22,6 @@
 {% block extrahead %}
   {{ block.super }}
   {{ media.js }}
-  {% if action_form %}{% if actions_on_top or actions_on_bottom %}
-    <script type="text/javascript">
-      (function ($) {
-        $(document).ready(function ($) {
-          const actionCheckboxes = $("tr input.action-select");
-          if (actionCheckboxes.length) {
-            Actions(actionCheckboxes);
-          }
-        });
-      })(django.jQuery);
-    </script>
-  {% endif %}{% endif %}
 {% endblock %}
 
 {% block bodyclass %}change-list{% endblock %}
