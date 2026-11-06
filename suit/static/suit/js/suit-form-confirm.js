@@ -45,9 +45,18 @@ var confirmExitIfModified = (function () {
                     return true;
                 }
             } else if (type == "select-one" || type == "select-multiple") {
+                // A single select without a `selected` option shows its first
+                // one, e.g. the empty option of an autocomplete field
+                var implicit = type == "select-one";
                 for (var j = 0; j < element.options.length; j++) {
-                    if (element.options[j].selected !=
-                        element.options[j].defaultSelected) {
+                    if (element.options[j].defaultSelected) {
+                        implicit = false;
+                    }
+                }
+                for (var j = 0; j < element.options.length; j++) {
+                    var defaultSelected = element.options[j].defaultSelected
+                        || (implicit && j === 0);
+                    if (element.options[j].selected != defaultSelected) {
                         return true;
                     }
                 }
